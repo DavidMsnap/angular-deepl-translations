@@ -55,7 +55,7 @@
 		// @ts-ignore
 		Monaco = await import('monaco-editor');
 		editor = Monaco.editor.create(inputContainer, {
-			value: ['{ "hi": "hi" }'].join('\n'),
+			value: '',
 			language: 'json',
 			options: monacoOptions
 		});
@@ -76,7 +76,10 @@
 
 	const translate = async () => {
 		translating = true;
-		const inputText: string = editor.getValue();
+
+        const inputText: string = editor.getValue();
+        // editor.setValue(JSON.stringify(inputText, undefined, 4));
+
 		let inputJson;
 		try {
 			inputJson = JSON.parse(inputText);
