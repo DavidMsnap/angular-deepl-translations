@@ -166,7 +166,7 @@
 
 <div id="attributionContainer">
 	<span class="attributionLine">Made With ❤️</span>
-	<span class="attributionLine">by <a href="https://github.com/DavidM42/angular-deepl-translations">David</a></span>
+	<span class="attributionLine">by <a href="https://github.com/DavidM42/angular-deepl-translations" target="_blank">David</a></span>
 </div>
 
 <style lang="scss">
@@ -242,6 +242,10 @@
 		text-align: right;
 		color: #9b9b9b;
 		font-size: 0.75em;
+
+        z-index: 1000;
+        background-color: #fff;
+        border-radius: 5px;
 	}
 
 	span.attributionLine {
