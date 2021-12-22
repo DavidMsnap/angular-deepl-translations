@@ -55,7 +55,7 @@
 		// @ts-ignore
 		Monaco = await import('monaco-editor');
 		editor = Monaco.editor.create(inputContainer, {
-			value: '',
+			value: '{\n\n}',
 			language: 'json',
 			options: monacoOptions
 		});
