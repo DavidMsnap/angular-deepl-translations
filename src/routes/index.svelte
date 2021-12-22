@@ -77,8 +77,8 @@
 	const translate = async () => {
 		translating = true;
 
-        const inputText: string = editor.getValue();
-        // editor.setValue(JSON.stringify(inputText, undefined, 4));
+		const inputText: string = editor.getValue();
+		// editor.setValue(JSON.stringify(inputText, undefined, 4));
 
 		let inputJson;
 		try {
@@ -149,7 +149,7 @@
 		</div>
 
 		<div class="column">
-			{#each Object.keys(Language).filter(languageKey => Language[languageKey] != inputLang) as langKey}
+			{#each Object.keys(Language).filter((languageKey) => Language[languageKey] != inputLang) as langKey}
 				<span class="lang-label">{langKey} {languageFlags[Language[langKey]]}</span>
 				<div class="lang-result">
 					<CodeSnippet
@@ -166,10 +166,14 @@
 
 <div id="attributionContainer">
 	<span class="attributionLine">Made With ❤️</span>
-	<span class="attributionLine">by <a href="https://github.com/DavidM42/angular-deepl-translations" target="_blank">David</a></span>
+	<span class="attributionLine"
+		>by <a href="https://github.com/DavidM42/angular-deepl-translations" target="_blank">David</a
+		></span
+	>
 </div>
 
 <style lang="scss">
+	// general styles
 	div.content {
 		width: 100%;
 		display: flex;
@@ -178,7 +182,6 @@
 		align-items: center;
 
 		h1 {
-			font-size: 3rem;
 			margin-top: 50px;
 			margin-bottom: 25px;
 
@@ -191,17 +194,9 @@
 
 		& .columns {
 			display: flex;
-			flex-direction: row;
-
-			// width: 100%;
-			// width: 75vw;
-			// min-width: 850px;
 
 			& > .column {
 				margin: 20px;
-
-				width: 600px;
-				max-width: 45vw;
 
 				& > .monaco-border {
 					margin-bottom: 10px;
@@ -229,6 +224,36 @@
 		}
 	}
 
+	@media only screen and (min-width: 1150px) {
+		// dsktop two column ui
+		h1 {
+			font-size: 3rem;
+		}
+
+		div.columns {
+			flex-direction: row;
+			& > .column {
+				max-width: 45vw;
+				width: 600px;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 1149px) {
+		// mobile phone one column ui
+		h1 {
+			font-size: 2rem;
+		}
+
+		div.columns {
+			flex-direction: column;
+			flex-wrap: wrap;
+			& > .column {
+				width: 95vw;
+			}
+		}
+	}
+
 	// overwrite for weird styling of pre in multiline code-snippet
 	:global(pre) {
 		padding-bottom: 0px !important;
@@ -236,23 +261,25 @@
 
 	#attributionContainer {
 		position: fixed;
-		bottom: 8px;
-		right: 16px;
+		bottom: 5px;
+		right: 10px;
 
 		text-align: right;
 		color: #9b9b9b;
 		font-size: 0.75em;
 
-        z-index: 1000;
-        background-color: #fff;
-        border-radius: 5px;
+		z-index: 1000;
+		background-color: #fff;
+		padding: 5px;
+		border: 1px solid #333;
+		border-radius: 5px;
 	}
 
 	span.attributionLine {
 		display: block;
 
-        & a {
-            color: #0353e9;
-        }
+		& a {
+			color: #0353e9;
+		}
 	}
 </style>
