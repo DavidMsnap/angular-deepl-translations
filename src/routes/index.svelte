@@ -75,8 +75,6 @@
 	};
 
 	const translate = async () => {
-		translating = true;
-
 		const inputText: string = editor.getValue();
 		// editor.setValue(JSON.stringify(inputText, undefined, 4));
 
@@ -108,6 +106,8 @@
 				inputLang: inputLang,
 				outputLangs: translationDestinations
 			};
+
+			translating = true;
 
 			const result = await fetch(`/translate`, {
 				method: 'POST',
