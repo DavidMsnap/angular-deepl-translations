@@ -80,6 +80,13 @@
 		const inputText: string = editor.getValue();
 		// editor.setValue(JSON.stringify(inputText, undefined, 4));
 
+		// for now limit of input json 1500chars (inlcuding keys we don't send to deepl)
+		// because deepL api max limit of 500k per month
+		if (inputText.length > 1500) {
+			alert('Input is too long (over 1.5k characters).');
+			return;
+		}
+
 		let inputJson;
 		try {
 			inputJson = JSON.parse(inputText);
