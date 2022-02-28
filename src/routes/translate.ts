@@ -1,10 +1,13 @@
-
-import type { EndpointOutput, Request } from '@sveltejs/kit';
+import type { JSONObject, ShadowEndpointOutput } from '@sveltejs/kit/types/internal';
 import dotenv from 'dotenv'
 import translate from 'deepl';
-import promiseAllProperties from 'promise-all-properties';
 
 import type { TranslateRequestBody } from 'src/types/requestBody';
+
+
+// TODO nicer typing sommehow or find out why it's .default when built and not if in dev mode?
+import PaP from 'promise-all-properties';
+const promiseAllProperties = (PaP as any).default ? (PaP as any).default : PaP;
 
 dotenv.config()
 
@@ -36,9 +39,9 @@ async function translateEveryValueInObj(sourceLang: string, destLang: string, ob
     return translatedObj;
 }
 
-export async function post({ request }): Promise<EndpointOutput> {
+export async function post({ request }): Promise<ShadowEndpointOutput> {
     // TODO better typing?
-    const body: TranslateRequestBody = (await request.json()) as unknown as TranslateRequestBody;
+    const body: TranslateRequestBody = (await request.json()) as TranslateRequestBody;
     // console.log("Translate request body:", body);
 
     const sourceLang = body.inputLang;
@@ -49,9 +52,11 @@ export async function post({ request }): Promise<EndpointOutput> {
         result[lang] = translateEveryValueInObj(sourceLang, lang, text);
     }
 
-    const translated = await promiseAllProperties(result);
+
+
+    const translated: JSONObject = await promiseAllProperties(result);
     // console.log("Got:", translated);
     return {
-        body: JSON.stringify(translated)
+        body: translated
     };
 }
