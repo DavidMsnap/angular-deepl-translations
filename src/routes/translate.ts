@@ -36,9 +36,9 @@ async function translateEveryValueInObj(sourceLang: string, destLang: string, ob
     return translatedObj;
 }
 
-export async function post(request: Request): Promise<EndpointOutput> {
+export async function post({ request }): Promise<EndpointOutput> {
     // TODO better typing?
-    const body: TranslateRequestBody = request.body as unknown as TranslateRequestBody;
+    const body: TranslateRequestBody = (await request.json()) as unknown as TranslateRequestBody;
     // console.log("Translate request body:", body);
 
     const sourceLang = body.inputLang;
