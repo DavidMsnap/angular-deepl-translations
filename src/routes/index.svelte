@@ -118,15 +118,17 @@
 			});
 
 			const resultJson = await result.json();
-			translating = false;
 			console.log('Translation results: ', resultJson);
 
 			for (const lang in resultJson) {
 				translations[lang] = JSON.stringify(resultJson[lang], undefined, 4);
 			}
 		} catch (e) {
+			console.error(e);
 			// TODO nice modal not alert?
 			alert(e);
+		} finally {
+			translating = false;
 		}
 	};
 
