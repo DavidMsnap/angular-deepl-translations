@@ -163,7 +163,7 @@
 			<div class="button-row">
 				<Button on:click={translate}>Translate</Button>
 
-				{#if Object.keys(translations).length > 0}
+				{#if Object.keys(translations).length > 1}
 					<Button kind="secondary" on:click={copyMarkdown}>Copy all as Markdown</Button>
 				{/if}
 			</div>
