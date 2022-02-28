@@ -129,6 +129,14 @@
 			alert(e);
 		}
 	};
+
+	const copyMarkdown = () => {
+		let message = '';
+		for (const key of Object.keys(translations)) {
+			message += `${languageFlags[key]} ${key.toUpperCase()}:\n\n\`\`\`\n${translations[key]}\n\`\`\`\n\n`;
+		}
+		navigator.clipboard.writeText(message)
+	}
 </script>
 
 <div class="content">
@@ -152,7 +160,13 @@
 				<div class="monaco-container" bind:this={inputContainer} />
 			</div>
 
-			<Button on:click={translate}>Translate</Button>
+			<div class="button-row">
+				<Button on:click={translate}>Translate</Button>
+
+				{#if Object.keys(translations).length > 1}
+					<Button kind="secondary" on:click={copyMarkdown}>Copy all as Markdown</Button>
+				{/if}
+			</div>
 		</div>
 
 		<div class="column">
@@ -216,6 +230,11 @@
 						min-height: 300px;
 						max-width: 100%;
 					}
+				}
+
+				& .button-row {
+					display: flex;
+					justify-content: space-between;
 				}
 
 				& > .lang-label {
