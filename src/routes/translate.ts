@@ -26,7 +26,9 @@ async function translateEveryValueInObj(sourceLang: string, destLang: string, ob
                 free_api: true,
                 text: obj[key],
                 target_lang: destLang.toUpperCase() as any,
-                source_lang: sourceLang.toUpperCase() as any
+                source_lang: sourceLang.toUpperCase() as any,
+                // be business formal for all non english target languages
+                formality: destLang.toUpperCase() === 'EN' ? undefined : 'more'
             });
             // console.log("Got: ", translateResult.data);
             translatedObj[key] = translateResult.data.translations[0].text;
